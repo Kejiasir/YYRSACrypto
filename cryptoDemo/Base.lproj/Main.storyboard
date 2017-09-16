@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +17,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJN-0k-Lhn">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Pwl-Wb-3dJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="zLa-Co-baM"/>
+                                </constraints>
+                                <state key="normal" title=" 公钥加密"/>
+                                <connections>
+                                    <action selector="publicEncrypt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DXN-dX-5oZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ak4-DU-B9o">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="私钥解密"/>
+                                <connections>
+                                    <action selector="privateDecrypt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bw0-ob-4sr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a50-2W-VQe">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="私钥加密"/>
+                                <connections>
+                                    <action selector="privateEncrypt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mse-M7-6UR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBX-4r-gj8">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="公钥解密"/>
+                                <connections>
+                                    <action selector="publicDecrypt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KxL-eg-bX2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIH-RP-D1b">
+                                <color key="backgroundColor" red="1" green="0.45098039220000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Yrv-Wn-bbn"/>
+                                    <constraint firstAttribute="height" constant="40" id="nKS-pg-rs6"/>
+                                </constraints>
+                                <state key="normal" title="生成密钥对"/>
+                                <connections>
+                                    <action selector="generateKeyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GGZ-Sd-yOX"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="a50-2W-VQe" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="1Mc-hJ-t0N"/>
+                            <constraint firstItem="Ak4-DU-B9o" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="Ggt-XX-6A2"/>
+                            <constraint firstItem="a50-2W-VQe" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="HO2-j6-flR"/>
+                            <constraint firstItem="gBX-4r-gj8" firstAttribute="height" secondItem="a50-2W-VQe" secondAttribute="height" id="IMm-eQ-cAl"/>
+                            <constraint firstItem="gBX-4r-gj8" firstAttribute="width" secondItem="a50-2W-VQe" secondAttribute="width" id="NMq-o0-RnJ"/>
+                            <constraint firstItem="YJN-0k-Lhn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="160" id="On1-O6-jcW"/>
+                            <constraint firstItem="a50-2W-VQe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Q91-tU-DKt"/>
+                            <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="S8T-U4-w6A"/>
+                            <constraint firstItem="CIH-RP-D1b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="Ssh-iK-j69"/>
+                            <constraint firstItem="Ak4-DU-B9o" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="Syt-H5-GuZ"/>
+                            <constraint firstItem="YJN-0k-Lhn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Wwz-yi-UuE"/>
+                            <constraint firstItem="a50-2W-VQe" firstAttribute="top" secondItem="YJN-0k-Lhn" secondAttribute="bottom" constant="50" id="etu-uV-de6"/>
+                            <constraint firstItem="CIH-RP-D1b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nf7-l7-UmC"/>
+                            <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerY" secondItem="YJN-0k-Lhn" secondAttribute="centerY" id="pMp-T2-eBT"/>
+                            <constraint firstItem="gBX-4r-gj8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="qvX-hg-O27"/>
+                            <constraint firstItem="gBX-4r-gj8" firstAttribute="centerY" secondItem="a50-2W-VQe" secondAttribute="centerY" id="u7T-Zs-INh"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-538" y="-18"/>
         </scene>
     </scenes>
 </document>
