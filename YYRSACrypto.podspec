@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/Kejiasir/YYRSACrypto"
   
   s.source       = { :git => "https://github.com/Kejiasir/YYRSACrypto.git", :tag => "#{s.version}" }
-  s.source_files = 'YYRSACrypto/YYRSACrypto/*.{h,m}'
+  s.source_files = 'YYRSACrypto/YYRSACrypto/**/*.{h,m}'
 
   s.platform     = :ios, "8.0" 
   s.requires_arc = true
