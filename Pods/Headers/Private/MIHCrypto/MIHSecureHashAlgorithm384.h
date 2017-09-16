@@ -1,0 +1,1 @@
+../../../MIHCrypto/MIHCrypto/SHA/MIHSecureHashAlgorithm384.h

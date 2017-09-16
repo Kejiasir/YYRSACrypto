@@ -1,3 +1,38 @@
-PODFILE CHECKSUM: d75e4a959178d5454918e247c4290a5a6a56f9a0
+PODS:
+  - GTMBase64 (1.0.0)
+  - MIHCrypto (0.4.1):
+    - MIHCrypto/AES (= 0.4.1)
+    - MIHCrypto/Core (= 0.4.1)
+    - MIHCrypto/DES (= 0.4.1)
+    - MIHCrypto/Mathematics (= 0.4.1)
+    - MIHCrypto/MD5 (= 0.4.1)
+    - MIHCrypto/RSA (= 0.4.1)
+    - MIHCrypto/SHA (= 0.4.1)
+  - MIHCrypto/AES (0.4.1):
+    - MIHCrypto/Core
+  - MIHCrypto/Core (0.4.1):
+    - OpenSSL-Universal (~> 1.0.1.18)
+  - MIHCrypto/DES (0.4.1):
+    - MIHCrypto/Core
+  - MIHCrypto/Mathematics (0.4.1):
+    - MIHCrypto/Core
+  - MIHCrypto/MD5 (0.4.1):
+    - MIHCrypto/Core
+  - MIHCrypto/RSA (0.4.1):
+    - MIHCrypto/Core
+  - MIHCrypto/SHA (0.4.1):
+    - MIHCrypto/Core
+  - OpenSSL-Universal (1.0.1.20)
+
+DEPENDENCIES:
+  - GTMBase64 (~> 1.0.0)
+  - MIHCrypto (~> 0.4.1)
+
+SPEC CHECKSUMS:
+  GTMBase64: 0da7372e95f5171f3f652db38cde6716f8eb5e24
+  MIHCrypto: 9c83cf35a3c218928847df8faf1ba080975a0bf2
+  OpenSSL-Universal: 71f2c4b2ae758e2218090f905e95ca0ac5c01be7
+
+PODFILE CHECKSUM: 6874a46785d83dc67c7744dd690a8111dddb3611
 
 COCOAPODS: 1.0.1
