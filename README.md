@@ -1,10 +1,19 @@
 # YYRSACrypto
-基于 MIHCrypto 封装的 RSA 加密解密工具类
+基于 MIHCrypto 封装的 RSA 加密解密工具类, 可生成密钥对, 可以归档到沙盒, 可以进行公钥加密私钥解密, 反之私钥加密公钥解密亦可. 基本一句代码就能实现;
+另外, 也可导入服务器返回的公钥或者私钥字符串, 然后进行加密或者解密.
 
-暂时不支持 CocoaPods 安装, 可将 Demo 中的 **YYRSACrypto** 文件夹 拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要手动导入 **openssl** .
+### 手动安装:
+将 Demo 中的 **YYRSACrypto** 文件夹 拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入 **MIHCrypto**, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要手动导入 **openssl** .
 
 
-### 头文件方法
+### CocoaPods 安装
+```
+pod 'YYRSACrypto'
+```
+建议使用 CocoaPods 安装, 这样不需要再手动导入其它依赖库, 会自动安装 **MIHCrypto** ,**openssl** 和 **GTMBase64** 这三个库.
+
+
+### 头文件定义的方法
 
 ``` objc
 #pragma mark - 生成RSA密钥对
