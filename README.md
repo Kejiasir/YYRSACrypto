@@ -1,15 +1,24 @@
 # YYRSACrypto
-基于 MIHCrypto 封装的 RSA 加密解密工具类
+基于 MIHCrypto 封装的 RSA 加密解密工具类, 可生成密钥对, 可以归档到沙盒, 可以进行公钥加密私钥解密, 反之私钥加密公钥解密亦可. 一句代码就能实现;
+另外, 也可导入服务器返回的公钥或者私钥字符串, 然后进行加密或者解密.
 
-暂时不支持 CocoaPods 安装, 可将 Demo 中的 **YYRSACrypto** 文件夹 拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要手动导入 **openssl** .
+### 手动安装:
+将 Demo 中的 **YYRSACrypto** 文件夹 拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入 **MIHCrypto**, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要手动导入 **openssl** .
 
 
-### 头文件方法
+### CocoaPods 安装
+```
+pod 'YYRSACrypto'
+```
+建议使用 CocoaPods 安装, 这样不需要再手动导入其它依赖库, 会自动安装 **MIHCrypto** ,**openssl** 和 **GTMBase64** 这三个库.
+
+
+### 头文件定义的方法
 
 ``` objc
 #pragma mark - 生成RSA密钥对
 /**
- * 生成RSA密钥对
+ * 生成RSA密钥对, 或者使用 '-rsa_generate_key:archiverFileName:'
  
  @param block 回调生成的密钥对模型, 秘钥大小为 1024 字节
  @param name 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
@@ -17,7 +26,7 @@
 + (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name;
 
 /**
- * 生成RSA密钥对
+ * 生成RSA密钥对, 或者使用 '-rsa_generate_key:keySize:archiverFileName:'
  
  @param block   回调生成的密钥对模型
  @param keySize 枚举, 可指定生成的秘钥大小
@@ -33,19 +42,19 @@
  @param keyPair 密钥对模型
  @param dataStr 需加密的字符串
  
- @return 返回加密的二进制结果
+ @return 返回加密的密文字符串
  */
-+ (NSData *)privateEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr;
++ (NSString *)privateEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr;
 
 /**
  * 公钥解密
  
  @param keyPair 密钥对模型
- @param data    需解密的二进制数据
+ @param dataStr 需解密的'加密后的字符串'
  
  @return 返回解密的原文字符串
  */
-+ (NSString *)publicDecrypt:(MIHKeyPair *)keyPair decryptData:(NSData *)data;
++ (NSString *)publicDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr;
 
 
 #pragma mark - 公钥加密, 私钥解密
@@ -55,19 +64,19 @@
  @param keyPair 密钥对模型
  @param dataStr 需加密的字符串
  
- @return 返回加密的二进制结果
+ @return 返回加密的密文字符串
  */
-+ (NSData *)publicEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr;
++ (NSString *)publicEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr;
 
 /**
  * 私钥解密
  
  @param keyPair 密钥对模型
- @param data    需解密的二进制数据
+ @param dataStr 需解密的'加密后的字符串'
  
  @return 返回解密的原文字符串
  */
-+ (NSString *)privateDecrypt:(MIHKeyPair *)keyPair decryptData:(NSData *)data;
++ (NSString *)privateDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr;
 
 
 #pragma mark - 归档/解档 密钥对模型
@@ -142,7 +151,7 @@
 - (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name;
 
 /**
- * 生成RSA密钥对, 或者使用 '+rsa_generate_key:archiverFileName:'
+ * 生成RSA密钥对, 或者使用 '+rsa_generate_key:keySize:archiverFileName:'
  
  @param block   回调生成的密钥对模型
  @param keySize 枚举, 可指定生成的秘钥大小
@@ -170,6 +179,8 @@
  @param aPrivateKey 私钥字符串, 须是去掉头尾和换行符等的纯私钥字符串
  */
 + (void)keyPair:(KeyPairBlock)block publicKey:(NSString *)aPublicKey privateKey:(NSString *)aPrivateKey;
+
+
 
 
 ```
