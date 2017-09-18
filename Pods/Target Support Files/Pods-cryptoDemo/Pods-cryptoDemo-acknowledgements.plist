@@ -37,6 +37,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>GTMBase64</string>
 			<key>Type</key>
@@ -64,6 +66,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>MIHCrypto</string>
 			<key>Type</key>
@@ -199,6 +203,8 @@ SOFTWARE.
  */
 
 </string>
+			<key>License</key>
+			<string>OpenSSL (OpenSSL/SSLeay)</string>
 			<key>Title</key>
 			<string>OpenSSL-Universal</string>
 			<key>Type</key>

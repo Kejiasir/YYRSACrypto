@@ -46,34 +46,34 @@ typedef void (^cStrBlock)(const char *cString);
 
 
 #pragma mark -
-+ (NSData *)privateEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
++ (NSString *)privateEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
     NSError *encryptionError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.private encrypt:data error:&encryptionError];
-    return !encryptionError ? [GTMBase64 encodeData:encryptData] : nil;
+    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
 }
 
 
-+ (NSString *)publicDecrypt:(MIHKeyPair *)keyPair decryptData:(NSData *)data {
++ (NSString *)publicDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr {
     NSError *decryptionError = nil;
-    data = [GTMBase64 decodeData:data];
+    NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.public decrypt:data error:&decryptionError];
     return !decryptionError ? dataToStr(decryptData) : nil;
 }
 
 
 #pragma mark -
-+ (NSData *)publicEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
++ (NSString *)publicEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
     NSError *encryptionError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.public encrypt:data error:&encryptionError];
-    return !encryptionError ? [GTMBase64 encodeData:encryptData] : nil;
+    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
 }
 
 
-+ (NSString *)privateDecrypt:(MIHKeyPair *)keyPair decryptData:(NSData *)data {
++ (NSString *)privateDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr {
     NSError *decryptionError = nil;
-    data = [GTMBase64 decodeData:data];
+    NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.private decrypt:data error:&decryptionError];
     return !decryptionError ? dataToStr(decryptData) : nil;
 }
@@ -253,7 +253,7 @@ static inline bool rsa_generate_key(RSA **public_key, RSA **private_key, MIHRSAK
     BN_set_word(a, 65537);
     @try {
         RSA *rsa = RSA_new();
-        /// use new version. -- RSA_generate_key() is deprecated. --
+        /// use new version. ==> RSA_generate_key() is deprecated. <==
         /// generates a key pair and stores it in the RSA structure provided in rsa.
         /// returns 1 on success or 0 on error.
         int result = RSA_generate_key_ex(rsa, keySize * 8, a, NULL);
@@ -318,7 +318,7 @@ static inline NSString *charToStr(const char *cString) {
     return [[NSString alloc] initWithCString:cString encoding:NSUTF8StringEncoding];
 }
 
-/** 沙盒 Document 路径 */
+/** 沙盒 Documents 路径 */
 static inline NSString *documentsDir() {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
