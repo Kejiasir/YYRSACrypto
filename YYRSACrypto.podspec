@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYRSACrypto"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "基于 MIHCrypto 封装的 RSA 加密解密工具类."
   s.description  = <<-DESC
                   基于 MIHCrypto 封装的 RSA 加密解密工具类, 加密解密, 只需要一句代码就能实现.
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   # s.social_media_url   = "http://twitter.com/Arvin"
 
   # s.platform     = :ios
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "6.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
