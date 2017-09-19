@@ -1,0 +1,21 @@
+//
+//  PrefixHeader.pch
+//  cryptoDemo
+//
+//  Created by Arvin on 17/9/19.
+//  Copyright © 2017年 Arvin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define TestPublicKey @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCkraqVg0hIC6R7gGPiaZ1ZI30DKfRyqkQfvnstMDzkOSGjTNbehSP69Vmt/iEY/CZx5iEWJGpb13WxjOJ5mtLopOtF5iEgZ0tf4eEdCeQZaEfZIYIYZneDVA2YMNlXpU55+twzEvSpDbK08J5MoCRwROI8sQwwFD2E1XiGj7W1jwIDAQAB"
+
+
+#define TestPrivateKey @"MIICXQIBAAKBgQCkraqVg0hIC6R7gGPiaZ1ZI30DKfRyqkQfvnstMDzkOSGjTNbehSP69Vmt/iEY/CZx5iEWJGpb13WxjOJ5mtLopOtF5iEgZ0tf4eEdCeQZaEfZIYIYZneDVA2YMNlXpU55+twzEvSpDbK08J5MoCRwROI8sQwwFD2E1XiGj7W1jwIDAQABAoGAeUz7BBqp2XfJ9rbB3HrTTl+XrAbxaq0EdSWH8edAUxPKNVFaTJphwG+NWV6B3reNUgSjhn3YYkI5DUmrYMusYkKTszaFou0jo202VYVelkCXLurXUQ8P5sFojVV/4vwawjxS9909j726AUNsPSlhf4q5Vbj2C/3oGYJ3bSn00sECQQDzNqL9wSxXaNv807LTkLX3OPgZhdrGCxbfVlmWuPjRZ3YNTaaE91zl0+Mq5xXabK29LBZjfq7VR1qs1lqsyFdfAkEArVYKnPtjl4i98rmXP1RrU4tVecb0wrVBwmNbVXIA0Ks8yBmob+G3Yy5hnZhpIdmGXvq3QVio/MH25XW+jRo/0QJBAOTc1wd+DaG7NLd25mIbXH/lBeHOiY2uxbkn4mnoaYtzlizyku2wb6R9fNjUV0YQ2nSW1gKOJSrhWDwoAW9xnnUCQCLFnu1s9MaiVNCLcI7wxXMGAYijY9hneiCfw+O5MfaqU1Ak7Yg8NIi99jEiMPzsYStOilKekY/a7UeMvkQaHvECQQCLZ/D0jAeoNCWo3ETkZgtsKMNyJxtRjHmw+aRNKWYAO4O5eDSSU/9CkirSgzBLH1PICHStN/s1BToX8jsQ47NC"
+
+
+#endif /* PrefixHeader_pch */

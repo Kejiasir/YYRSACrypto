@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MIHRSAKeyFactory.h"
-
-@class MIHKeyPair;
+#import "MIHKeyPair.h"
 
 /**
  * 密钥对模型回调
@@ -110,6 +109,34 @@ typedef void(^KeyPairBlock)(MIHKeyPair *keyPair);
  @param fileName 归档时的文件名, 根据文件名取出归档的对象, 不能为 nil
  */
 + (void)unarchiverKeyPair:(KeyPairBlock)block withFileName:(NSString *)fileName;
+
+/**
+ * 归档 MIHKeyPair 对象, 存储到偏好设置
+ 
+ @param keyPair 需要归档的密钥对模型
+ */
++ (void)archiverKeyPair:(MIHKeyPair *)keyPair;
+
+/**
+ * 解档 MIHKeyPair 对象, 从偏好设置中读取
+ 
+ @param block 通过 block 回调解档出来的密钥对模型
+ */
++ (void)unarchiverKeyPair:(KeyPairBlock)block;
+
+/**
+ * 偏好设置中是否已存在 MIHKeyPair 数据
+ 
+ @return 如果有返回 YES, 没有则返回 NO
+ */
++ (BOOL)isExistFileWithUserDefaults;
+
+/**
+ * 从偏好设置中删除 MIHKeyPair 数据
+ 
+ @return 删除成功返回 YES, 失败返回 NO
+ */
++ (BOOL)removeFileFromUserDefaults;
 
 
 #pragma mark - 获取密钥对字符串

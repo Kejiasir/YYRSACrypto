@@ -12,7 +12,6 @@
 #import "MIHInternal.h"
 #import <openssl/pem.h>
 #import <openssl/rsa.h>
-#import "MIHKeyPair.h"
 #import <GTMBase64.h>
 
 /**
@@ -21,6 +20,8 @@
  @param cString c 字符串
  */
 typedef void (^cStrBlock)(const char *cString);
+
+static NSString *const KeyPair = @"KeyPair_key";
 
 @interface YYRSACrypto () {
     RSA *publicKey, *privateKey;
@@ -91,6 +92,29 @@ typedef void (^cStrBlock)(const char *cString);
     NSAssert(fileName, @"fileName can not be empty...");
     NSString *filePath = [documentsDir() stringByAppendingPathComponent:fileName];
     !block ?: block((MIHKeyPair *)[NSKeyedUnarchiver unarchiveObjectWithFile:filePath]);
+}
+
+
++ (void)archiverKeyPair:(MIHKeyPair *)keyPair {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:keyPair];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:KeyPair];
+}
+
+
++ (void)unarchiverKeyPair:(KeyPairBlock)block {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:KeyPair];
+    !block ?: block((MIHKeyPair *)[NSKeyedUnarchiver unarchiveObjectWithData:data]);
+}
+
+
++ (BOOL)isExistFileWithUserDefaults {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:KeyPair] ? YES : NO;
+}
+
+
++ (BOOL)removeFileFromUserDefaults {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KeyPair];
+    return ![[self class] isExistFileWithUserDefaults];
 }
 
 
@@ -198,6 +222,7 @@ static inline NSString *base64EncodedFromPEMFormat(NSString *PEMFormat) {
             stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
+
 /** 格式公钥字符串, 拼接页眉和页脚 */
 static inline NSString *formatterPublicKey(NSString *aPublicKey) {
     NSMutableString *mutableStr = [NSMutableString string];
@@ -217,6 +242,7 @@ static inline NSString *formatterPublicKey(NSString *aPublicKey) {
     [mutableStr appendString:@"\n-----END PUBLIC KEY-----"];
     return mutableStr.copy;
 }
+
 
 /** 格式化私钥字符串, 拼接页眉和页脚 */
 static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
@@ -240,12 +266,14 @@ static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
     return mutableStr.copy;
 }
 
+
 /** 判断文件是否存在沙盒目录中 */
 static inline bool isExistFileWithName(NSString *fileName) {
     if (!fileName || !fileName.length) return false;
     NSString *filePath = [documentsDir() stringByAppendingPathComponent:fileName];
     return (bool)[[NSFileManager defaultManager] fileExistsAtPath:filePath];
 }
+
 
 /** 生成 rsa key */
 static inline bool rsa_generate_key(RSA **public_key, RSA **private_key, MIHRSAKeySize keySize) {
@@ -272,6 +300,7 @@ static inline bool rsa_generate_key(RSA **public_key, RSA **private_key, MIHRSAK
         BN_free(a);
     }
 }
+
 
 /** 读取 pem key */
 static inline void get_pem_key(cStrBlock block, RSA *rsa, bool isPublicKey, bool isPkcs8) {
@@ -303,20 +332,24 @@ static inline void get_pem_key(cStrBlock block, RSA *rsa, bool isPublicKey, bool
     }
 }
 
+
 /** 字符串转换二进制 */
 static inline NSData *strToData(NSString *string) {
     return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
+
 
 /** 二进制转换字符串 */
 static inline NSString *dataToStr(NSData *data) {
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+
 /** c 字符串转换 oc 字符串 */
 static inline NSString *charToStr(const char *cString) {
     return [[NSString alloc] initWithCString:cString encoding:NSUTF8StringEncoding];
 }
+
 
 /** 沙盒 Documents 路径 */
 static inline NSString *documentsDir() {

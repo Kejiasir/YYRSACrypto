@@ -20,6 +20,7 @@
 /* Begin PBXFileReference section */
 		713E7C37CD21FF5E68FC6156 /* Pods-cryptoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-cryptoDemo/Pods-cryptoDemo.release.xcconfig"; sourceTree = "<group>"; };
 		99C501ADDEA80FE283C70C10 /* Pods-cryptoDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cryptoDemo/Pods-cryptoDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		A27C9E681F70B5E600D321B9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A29B79C61F6CB6BE004FC889 /* cryptoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29B79CA1F6CB6BE004FC889 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A29B79CC1F6CB6BE004FC889 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		A29B79C91F6CB6BE004FC889 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A27C9E681F70B5E600D321B9 /* PrefixHeader.pch */,
 				A29B79CA1F6CB6BE004FC889 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -366,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5H4YHTYPG3;
+				GCC_PREFIX_HEADER = $SRCROOT/cryptoDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = cryptoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -380,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5H4YHTYPG3;
+				GCC_PREFIX_HEADER = $SRCROOT/cryptoDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = cryptoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
