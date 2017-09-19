@@ -13,9 +13,19 @@ pod 'YYRSACrypto'
 建议使用 CocoaPods 安装, 这样不需要再手动导入其它依赖库, 会自动安装 **MIHCrypto** ,**openssl** 和 **GTMBase64** 这三个库.
 
 
+### Version: 0.0.2
+* 修改加密返回的数据类型, 由 NSData  修改为 NSString 
+* 修改解密的参数, 由 NSData  修改为 NSString
+
+
+### Version: 0.0.3
+* 新增归档解档接口, 存储数据到偏好设置
+
+
 ### 头文件定义的方法
 
 ``` objc
+
 #pragma mark - 生成RSA密钥对
 /**
  * 生成RSA密钥对, 或者使用 '-rsa_generate_key:archiverFileName:'
@@ -98,6 +108,34 @@ pod 'YYRSACrypto'
  */
 + (void)unarchiverKeyPair:(KeyPairBlock)block withFileName:(NSString *)fileName;
 
+/**
+ * 归档 MIHKeyPair 对象, 存储到偏好设置
+ 
+ @param keyPair 需要归档的密钥对模型
+ */
++ (void)archiverKeyPair:(MIHKeyPair *)keyPair;
+
+/**
+ * 解档 MIHKeyPair 对象, 从偏好设置中读取
+ 
+ @param block 通过 block 回调解档出来的密钥对模型
+ */
++ (void)unarchiverKeyPair:(KeyPairBlock)block;
+
+/**
+ * 偏好设置中是否已存在 MIHKeyPair 数据
+ 
+ @return 如果有返回 YES, 没有则返回 NO
+ */
++ (BOOL)isExistFileWithUserDefaults;
+
+/**
+ * 从偏好设置中删除 MIHKeyPair 数据
+ 
+ @return 删除成功返回 YES, 失败返回 NO
+ */
++ (BOOL)removeFileFromUserDefaults;
+
 
 #pragma mark - 获取密钥对字符串
 /**
@@ -179,8 +217,6 @@ pod 'YYRSACrypto'
  @param aPrivateKey 私钥字符串, 须是去掉头尾和换行符等的纯私钥字符串
  */
 + (void)keyPair:(KeyPairBlock)block publicKey:(NSString *)aPublicKey privateKey:(NSString *)aPrivateKey;
-
-
 
 
 ```
