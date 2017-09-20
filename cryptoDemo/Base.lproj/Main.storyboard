@@ -61,31 +61,66 @@
                                     <action selector="generateKeyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GGZ-Sd-yOX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-I4-0nH">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Auo-Ak-CWX"/>
+                                    <constraint firstAttribute="height" constant="40" id="KFL-Ad-1rD"/>
+                                </constraints>
+                                <state key="normal" title="生成秘钥并归档到沙盒"/>
+                                <connections>
+                                    <action selector="generateKey_archiver:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7jy-y2-LJs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1K-qI-zwI">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="从沙盒解档密钥对并加解密"/>
+                                <connections>
+                                    <action selector="unarchiver_crypto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Met-3p-PRL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyF-2B-9Od">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="设置服务器返回的秘钥并加解密"/>
+                                <connections>
+                                    <action selector="setServerKeyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GR3-yp-Kal"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="1Mc-hJ-t0N"/>
+                            <constraint firstItem="lyF-2B-9Od" firstAttribute="top" secondItem="R1K-qI-zwI" secondAttribute="bottom" constant="30" id="3hE-pA-d2z"/>
+                            <constraint firstItem="R1K-qI-zwI" firstAttribute="width" secondItem="Bdo-I4-0nH" secondAttribute="width" id="4jn-Bi-6cP"/>
+                            <constraint firstItem="Bdo-I4-0nH" firstAttribute="top" secondItem="gBX-4r-gj8" secondAttribute="bottom" constant="50" id="9gN-AA-RGp"/>
+                            <constraint firstItem="R1K-qI-zwI" firstAttribute="centerX" secondItem="Bdo-I4-0nH" secondAttribute="centerX" id="9jJ-VF-J4Q"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="Ggt-XX-6A2"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="HO2-j6-flR"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="height" secondItem="a50-2W-VQe" secondAttribute="height" id="IMm-eQ-cAl"/>
+                            <constraint firstItem="R1K-qI-zwI" firstAttribute="top" secondItem="Bdo-I4-0nH" secondAttribute="bottom" constant="30" id="JGK-gR-NqL"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="width" secondItem="a50-2W-VQe" secondAttribute="width" id="NMq-o0-RnJ"/>
                             <constraint firstItem="YJN-0k-Lhn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="160" id="On1-O6-jcW"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Q91-tU-DKt"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="S8T-U4-w6A"/>
                             <constraint firstItem="CIH-RP-D1b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="Ssh-iK-j69"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="Syt-H5-GuZ"/>
+                            <constraint firstItem="lyF-2B-9Od" firstAttribute="width" secondItem="R1K-qI-zwI" secondAttribute="width" id="Tv0-Z9-YOK"/>
+                            <constraint firstItem="lyF-2B-9Od" firstAttribute="centerX" secondItem="R1K-qI-zwI" secondAttribute="centerX" id="V9V-NA-QxD"/>
                             <constraint firstItem="YJN-0k-Lhn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Wwz-yi-UuE"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="top" secondItem="YJN-0k-Lhn" secondAttribute="bottom" constant="50" id="etu-uV-de6"/>
                             <constraint firstItem="CIH-RP-D1b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nf7-l7-UmC"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerY" secondItem="YJN-0k-Lhn" secondAttribute="centerY" id="pMp-T2-eBT"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="qvX-hg-O27"/>
+                            <constraint firstItem="R1K-qI-zwI" firstAttribute="height" secondItem="Bdo-I4-0nH" secondAttribute="height" id="tll-bQ-zU7"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="centerY" secondItem="a50-2W-VQe" secondAttribute="centerY" id="u7T-Zs-INh"/>
+                            <constraint firstItem="lyF-2B-9Od" firstAttribute="height" secondItem="R1K-qI-zwI" secondAttribute="height" id="vBp-2Y-dhd"/>
+                            <constraint firstItem="Bdo-I4-0nH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vY1-pn-dui"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-538" y="-18"/>
+            <point key="canvasLocation" x="-1010.4" y="-31.03448275862069"/>
         </scene>
     </scenes>
 </document>

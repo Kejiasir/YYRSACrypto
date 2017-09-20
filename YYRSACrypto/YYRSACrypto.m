@@ -29,19 +29,19 @@ static NSString *const KeyPair = @"KeyPair_key";
 
 @end
 
+
 @implementation YYRSACrypto
 
-
 #pragma mark -
-+ (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name {
-    [self rsa_generate_key:block keySize:MIHRSAKey1024 archiverFileName:name];
++ (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)fileName {
+    [self rsa_generate_key:block keySize:MIHRSAKey1024 archiverFileName:fileName];
 }
 
 
-+ (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)name {
++ (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)fileName {
     MIHRSAKeyFactory *keyFactory = [[MIHRSAKeyFactory alloc] init];
     [keyFactory setPreferedKeySize:keySize];
-    bool isExist = isExistFileWithName(name);
+    bool isExist = isExistFileWithName(fileName);
     !block ?: block(isExist ? nil : [keyFactory generateKeyPair], isExist);
 }
 
@@ -107,6 +107,7 @@ static NSString *const KeyPair = @"KeyPair_key";
 }
 
 
+#pragma mark -
 + (BOOL)isExistFileWithUserDefaults {
     return [[NSUserDefaults standardUserDefaults] objectForKey:KeyPair] ? YES : NO;
 }
@@ -115,6 +116,12 @@ static NSString *const KeyPair = @"KeyPair_key";
 + (BOOL)removeFileFromUserDefaults {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:KeyPair];
     return ![[self class] isExistFileWithUserDefaults];
+}
+
+
++ (BOOL)removeFileFromDocumentsDir:(NSString *)fileName {
+    NSString *filePath = [documentsDir() stringByAppendingPathComponent:fileName];
+    return [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
 }
 
 
@@ -144,14 +151,14 @@ static NSString *const KeyPair = @"KeyPair_key";
 
 
 #pragma mark -
-- (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name {
-    [self rsa_generate_key:block keySize:MIHRSAKey1024 archiverFileName:name];
+- (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)fileName {
+    [self rsa_generate_key:block keySize:MIHRSAKey1024 archiverFileName:fileName];
 }
 
 
-- (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)name {
+- (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)fileName {
     
-    bool isExist = isExistFileWithName(name);
+    bool isExist = isExistFileWithName(fileName);
     if (isExist) {
         !block ?: block(nil, isExist);
         return;
