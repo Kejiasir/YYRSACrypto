@@ -14,13 +14,15 @@ pod 'YYRSACrypto'
 
 
 ### Version: 0.0.2
-* 修改加密返回的数据类型, 由 NSData  修改为 NSString 
-* 修改解密的参数, 由 NSData  修改为 NSString
+* 修改加密返回的数据类型, 由 `NSData`  修改为 `NSString` 
+* 修改解密的参数, 由 `NSData`  修改为 `NSString`
 
 
 ### Version: 0.0.3
 * 新增归档解档接口, 存储数据到偏好设置
 
+### Version: 0.0.4
+* 新增从沙盒删除归档文件的方法
 
 ### 头文件定义的方法
 
@@ -31,18 +33,18 @@ pod 'YYRSACrypto'
  * 生成RSA密钥对, 或者使用 '-rsa_generate_key:archiverFileName:'
  
  @param block 回调生成的密钥对模型, 秘钥大小为 1024 字节
- @param name 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
+ @param fileName 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
  */
-+ (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name;
++ (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)fileName;
 
 /**
  * 生成RSA密钥对, 或者使用 '-rsa_generate_key:keySize:archiverFileName:'
  
  @param block   回调生成的密钥对模型
  @param keySize 枚举, 可指定生成的秘钥大小
- @param name    归档到沙盒中的文件名, 如果没有归档, 可以为 nil
+ @param fileName 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
  */
-+ (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)name;
++ (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)fileName;
 
 
 #pragma mark - 私钥加密, 公钥解密
@@ -122,6 +124,8 @@ pod 'YYRSACrypto'
  */
 + (void)unarchiverKeyPair:(KeyPairBlock)block;
 
+
+#pragma mark - 文件操作
 /**
  * 偏好设置中是否已存在 MIHKeyPair 数据
  
@@ -135,6 +139,15 @@ pod 'YYRSACrypto'
  @return 删除成功返回 YES, 失败返回 NO
  */
 + (BOOL)removeFileFromUserDefaults;
+
+/**
+ * 从沙盒目录中删除文件 (MIHKeyPair 对象)
+ 
+ @param fileName 归档到沙盒时的文件名
+ 
+ @return 删除成功返回 YES, 失败返回 NO
+ */
++ (BOOL)removeFileFromDocumentsDir:(NSString *)fileName;
 
 
 #pragma mark - 获取密钥对字符串
@@ -184,18 +197,18 @@ pod 'YYRSACrypto'
  * 生成RSA密钥对, 或者使用 '+rsa_generate_key:archiverFileName:'
  
  @param block 回调生成的密钥对模型, 秘钥大小为 1024 字节
- @param name 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
+ @param fileName 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
  */
-- (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)name;
+- (void)rsa_generate_key:(KeyPairExist)block archiverFileName:(NSString *)fileName;
 
 /**
  * 生成RSA密钥对, 或者使用 '+rsa_generate_key:keySize:archiverFileName:'
  
  @param block   回调生成的密钥对模型
  @param keySize 枚举, 可指定生成的秘钥大小
- @param name    归档到沙盒中的文件名, 如果没有归档, 可以为 nil
+ @param fileName 归档到沙盒中的文件名, 如果没有归档, 可以为 nil
  */
-- (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)name;
+- (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)fileName;
 
 
 #pragma mark - 设置服务器返回的秘钥字符串
