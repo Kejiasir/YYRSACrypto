@@ -1,10 +1,25 @@
 //
-//  YYRSACrypto.m
-//  cryptoDemo
+// YYRSACrypto.m
 //
-//  Created by Arvin on 17/9/16.
-//  Copyright © 2017年 Arvin. All rights reserved.
+// Copyright (c) 2017 Arvin (https://kejiasir.github.io/)
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 #import "YYRSACrypto.h"
 #import "MIHRSAPrivateKey.h"
@@ -22,6 +37,11 @@
 typedef void (^cStrBlock)(const char *cString);
 
 static NSString *const KeyPair = @"KeyPair_key";
+
+static NSString *const BEGIN_PUBLIC_KEY  = @"-----BEGIN PUBLIC KEY-----\n";
+static NSString *const END_PUBLIC_KEY    = @"\n-----END PUBLIC KEY-----";
+static NSString *const BEGIN_PRIVATE_KEY = @"-----BEGIN RSA PRIVATE KEY-----\n";
+static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
 
 @interface YYRSACrypto () {
     RSA *publicKey, *privateKey;
@@ -51,7 +71,8 @@ static NSString *const KeyPair = @"KeyPair_key";
     NSError *encryptionError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.private encrypt:data error:&encryptionError];
-    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
+    NSString *errorStr = [NSString stringWithFormat:@"private Encrypt Error: %@",encryptionError];
+    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
 }
 
 
@@ -59,7 +80,8 @@ static NSString *const KeyPair = @"KeyPair_key";
     NSError *decryptionError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.public decrypt:data error:&decryptionError];
-    return !decryptionError ? dataToStr(decryptData) : nil;
+    NSString *errorStr = [NSString stringWithFormat:@"public Decrypt Error: %@",decryptionError];
+    return !decryptionError ? dataToStr(decryptData) : errorStr;
 }
 
 
@@ -68,7 +90,8 @@ static NSString *const KeyPair = @"KeyPair_key";
     NSError *encryptionError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.public encrypt:data error:&encryptionError];
-    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
+    NSString *errorStr = [NSString stringWithFormat:@"public Encrypt Error: %@",encryptionError];
+    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
 }
 
 
@@ -76,7 +99,8 @@ static NSString *const KeyPair = @"KeyPair_key";
     NSError *decryptionError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.private decrypt:data error:&decryptionError];
-    return !decryptionError ? dataToStr(decryptData) : nil;
+    NSString *errorStr = [NSString stringWithFormat:@"private Decrypt Error: %@",decryptionError];
+    return !decryptionError ? dataToStr(decryptData) : errorStr;
 }
 
 
@@ -233,7 +257,7 @@ static inline NSString *base64EncodedFromPEMFormat(NSString *PEMFormat) {
 /** 格式公钥字符串, 拼接页眉和页脚 */
 static inline NSString *formatterPublicKey(NSString *aPublicKey) {
     NSMutableString *mutableStr = [NSMutableString string];
-    [mutableStr appendString:@"-----BEGIN PUBLIC KEY-----\n"];
+    [mutableStr appendString:BEGIN_PUBLIC_KEY];
     int count = 0;
     for (int i = 0; i < [aPublicKey length]; ++i) {
         unichar c = [aPublicKey characterAtIndex:i];
@@ -246,7 +270,7 @@ static inline NSString *formatterPublicKey(NSString *aPublicKey) {
             count = 0;
         }
     }
-    [mutableStr appendString:@"\n-----END PUBLIC KEY-----"];
+    [mutableStr appendString:END_PUBLIC_KEY];
     return mutableStr.copy;
 }
 
@@ -254,7 +278,7 @@ static inline NSString *formatterPublicKey(NSString *aPublicKey) {
 /** 格式化私钥字符串, 拼接页眉和页脚 */
 static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
     NSMutableString *mutableStr = [NSMutableString string];
-    [mutableStr appendString:@"-----BEGIN RSA PRIVATE KEY-----\n"];
+    [mutableStr appendString:BEGIN_PRIVATE_KEY];
     int index = 0, count = 0;
     while (index < [aPrivateKey length]) {
         char cStr = [aPrivateKey UTF8String][index];
@@ -269,7 +293,7 @@ static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
         }
         index++;
     }
-    [mutableStr appendString:@"\n-----END RSA PRIVATE KEY-----"];
+    [mutableStr appendString:END_PRIVATE_KEY];
     return mutableStr.copy;
 }
 
