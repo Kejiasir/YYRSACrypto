@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYRSACrypto"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "基于 MIHCrypto 封装的 RSA 加密解密工具类."
   s.description  = <<-DESC
                   基于 MIHCrypto 封装的 RSA 加密解密工具类, 加密解密, 只需要一句代码就能实现.
