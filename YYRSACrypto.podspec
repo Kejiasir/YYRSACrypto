@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYRSACrypto"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "基于 MIHCrypto 封装的 RSA 加密解密工具类."
   s.description  = <<-DESC
                   基于 MIHCrypto 封装的 RSA 加密解密工具类, 加密解密, 只需要一句代码就能实现.
@@ -15,10 +15,10 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
-  s.author             = { "Arvin" => "yasir86@126.com" }
+  s.author             = { "Arvin.Yang" => "arvinSir.86@gmail.com" }
 
-  # Or just: s.author    = "Arvin"
-  # s.authors            = { "Arvin" => "yasir86@126.com" }
+  # Or just: s.author    = "Arvin.Yang"
+  # s.authors            = { "Arvin.Yang" => "arvinSir.86@gmail.com" }
   # s.social_media_url   = "http://twitter.com/Arvin"
 
   # s.platform     = :ios
