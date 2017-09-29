@@ -1,7 +1,7 @@
 //
 // YYRSACrypto.m
 //
-// Copyright (c) 2017 Arvin (https://kejiasir.github.io/)
+// Copyright (c) 2017 Arvin (https://github.com/Kejiasir/YYRSACrypto)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,9 @@
 #import <GTMBase64.h>
 
 /**
- * pem key 回调 block
+ * pem key callback block
  
- @param cString c 字符串
+ @param cString c string
  */
 typedef void (^cStrBlock)(const char *cString);
 
@@ -159,7 +159,7 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSData *data = [keyPair.private dataValue];
     NSData *encodeData = [GTMBase64 encodeData:data];
     NSData *decodeData = [GTMBase64 decodeData:encodeData];
-    return base64EncodedFromPEMFormat(dataToStr(decodeData));
+    return base64EncodedFromPEMStr(dataToStr(decodeData));
 }
 
 
@@ -200,7 +200,7 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
         
         /// get rsa public pem Key
         get_pem_key(^(const char *cString) {
-            NSString *publicKeyStr = base64EncodedFromPEMFormat(charToStr(cString));
+            NSString *publicKeyStr = base64EncodedFromPEMStr(charToStr(cString));
             NSData *publicKeyData = [GTMBase64 decodeData:strToData(publicKeyStr)];
             rsaPublicKey = [[MIHRSAPublicKey alloc] initWithData:publicKeyData];
         }, publicKey, true, true);
@@ -229,7 +229,7 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     }
     if (aPublicKey && aPublicKey.length) {
         if ([aPublicKey hasPrefix:@"-----BEGIN PUBLIC KEY-----"]) {
-            aPublicKey = base64EncodedFromPEMFormat(aPublicKey);
+            aPublicKey = base64EncodedFromPEMStr(aPublicKey);
         }
         NSData *publicKeyData = [GTMBase64 decodeData:strToData(aPublicKey)];
         [keyPair setPublic:[[MIHRSAPublicKey alloc] initWithData:publicKeyData]];
@@ -243,10 +243,10 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
 }
 
 
-#pragma mark - private method
-/** 过滤秘钥字符串的页眉页脚, 换行符等 */
-static inline NSString *base64EncodedFromPEMFormat(NSString *PEMFormat) {
-    return [[[[[[PEMFormat componentsSeparatedByString:@"-----"] objectAtIndex:2]
+#pragma mark - Private method
+/** Filter secret key string header, newline, etc */
+static inline NSString *base64EncodedFromPEMStr(NSString *PEMStr) {
+    return [[[[[[PEMStr componentsSeparatedByString:@"-----"] objectAtIndex:2]
                stringByReplacingOccurrencesOfString:@"\r" withString:@""]
               stringByReplacingOccurrencesOfString:@"\n" withString:@""]
              stringByReplacingOccurrencesOfString:@"\t" withString:@""]
@@ -254,7 +254,7 @@ static inline NSString *base64EncodedFromPEMFormat(NSString *PEMFormat) {
 }
 
 
-/** 格式公钥字符串, 拼接页眉和页脚 */
+/** Format the public key string, splicing the header and footer */
 static inline NSString *formatterPublicKey(NSString *aPublicKey) {
     NSMutableString *mutableStr = [NSMutableString string];
     [mutableStr appendString:BEGIN_PUBLIC_KEY];
@@ -275,7 +275,7 @@ static inline NSString *formatterPublicKey(NSString *aPublicKey) {
 }
 
 
-/** 格式化私钥字符串, 拼接页眉和页脚 */
+/** Format the private key string, splicing the header and footer */
 static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
     NSMutableString *mutableStr = [NSMutableString string];
     [mutableStr appendString:BEGIN_PRIVATE_KEY];
@@ -298,7 +298,7 @@ static inline NSString *formatterPrivateKey(NSString *aPrivateKey) {
 }
 
 
-/** 判断文件是否存在沙盒目录中 */
+/** Determine if a file exists in a sandbox directory */
 static inline bool isExistFileWithName(NSString *fileName) {
     if (!fileName || !fileName.length) return false;
     NSString *filePath = [documentsDir() stringByAppendingPathComponent:fileName];
@@ -306,7 +306,7 @@ static inline bool isExistFileWithName(NSString *fileName) {
 }
 
 
-/** 生成 rsa key */
+/** Generating rsa key */
 static inline bool rsa_generate_key(RSA **public_key, RSA **private_key, MIHRSAKeySize keySize) {
     BIGNUM *a = BN_new();
     BN_set_word(a, 65537);
@@ -333,7 +333,7 @@ static inline bool rsa_generate_key(RSA **public_key, RSA **private_key, MIHRSAK
 }
 
 
-/** 读取 pem key */
+/** Read the pem key */
 static inline void get_pem_key(cStrBlock block, RSA *rsa, bool isPublicKey, bool isPkcs8) {
     if (!rsa) return;
     BIO *bp = BIO_new(BIO_s_mem());
@@ -364,25 +364,25 @@ static inline void get_pem_key(cStrBlock block, RSA *rsa, bool isPublicKey, bool
 }
 
 
-/** 字符串转换二进制 */
+/** String conversion binary */
 static inline NSData *strToData(NSString *string) {
     return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 
-/** 二进制转换字符串 */
+/** Binary conversion string */
 static inline NSString *dataToStr(NSData *data) {
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 
-/** c 字符串转换 oc 字符串 */
+/** C string conversion oc string */
 static inline NSString *charToStr(const char *cString) {
     return [[NSString alloc] initWithCString:cString encoding:NSUTF8StringEncoding];
 }
 
 
-/** 沙盒 Documents 路径 */
+/** Sandbox Documents path */
 static inline NSString *documentsDir() {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
