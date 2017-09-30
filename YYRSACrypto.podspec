@@ -2,10 +2,9 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYRSACrypto"
-  s.version      = "0.0.6"
-  s.summary      = "基于 MIHCrypto 封装的 RSA 加密解密工具类."
+  s.version      = "0.1.0"
+  s.summary      = "RSA encryption and decryption based on MIHCrypto encapsulation, signature verification tool class."
   s.description  = <<-DESC
-                  基于 MIHCrypto 封装的 RSA 加密解密工具类, 加密解密, 只需要一句代码就能实现.
                    DESC
 
   s.homepage     = "https://github.com/Kejiasir/YYRSACrypto"
