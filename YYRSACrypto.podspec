@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.version      = "0.1.0"
   s.summary      = "RSA encryption and decryption based on MIHCrypto encapsulation, signature verification tool class."
   s.description  = <<-DESC
+                   RSA encryption and decryption based on MIHCrypto encapsulation, signature verification tool class.
                    DESC
 
   s.homepage     = "https://github.com/Kejiasir/YYRSACrypto"
