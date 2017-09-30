@@ -1,7 +1,7 @@
 //
 // YYRSACrypto.m
 //
-// Copyright (c) 2017 Arvin (https://github.com/Kejiasir/YYRSACrypto)
+// Copyright (c) 2017 Arvin.Yang (https://github.com/Kejiasir/YYRSACrypto)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -68,39 +68,39 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
 
 #pragma mark -
 + (NSString *)privateEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
-    NSError *encryptionError = nil;
+    NSError *encryptError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encryptData = [keyPair.private encrypt:data error:&encryptionError];
-    NSString *errorStr = [NSString stringWithFormat:@"private Encrypt Error: %@",encryptionError];
-    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
+    NSData *encryptData = [keyPair.private encrypt:data error:&encryptError];
+    NSString *errorStr = [NSString stringWithFormat:@"Private encrypt error: %@",encryptError];
+    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
 }
 
 
 + (NSString *)publicDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr {
-    NSError *decryptionError = nil;
+    NSError *decryptError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
-    NSData *decryptData = [keyPair.public decrypt:data error:&decryptionError];
-    NSString *errorStr = [NSString stringWithFormat:@"public Decrypt Error: %@",decryptionError];
-    return !decryptionError ? dataToStr(decryptData) : errorStr;
+    NSData *decryptData = [keyPair.public decrypt:data error:&decryptError];
+    NSString *errorStr = [NSString stringWithFormat:@"Public decrypt error: %@",decryptError];
+    return !decryptError ? dataToStr(decryptData) : errorStr;
 }
 
 
 #pragma mark -
 + (NSString *)publicEncrypt:(MIHKeyPair *)keyPair encryptStr:(NSString *)dataStr {
-    NSError *encryptionError = nil;
+    NSError *encryptError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encryptData = [keyPair.public encrypt:data error:&encryptionError];
-    NSString *errorStr = [NSString stringWithFormat:@"public Encrypt Error: %@",encryptionError];
-    return !encryptionError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
+    NSData *encryptData = [keyPair.public encrypt:data error:&encryptError];
+    NSString *errorStr = [NSString stringWithFormat:@"Public encrypt error: %@",encryptError];
+    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
 }
 
 
 + (NSString *)privateDecrypt:(MIHKeyPair *)keyPair decryptStr:(NSString *)dataStr {
-    NSError *decryptionError = nil;
+    NSError *decryptError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
-    NSData *decryptData = [keyPair.private decrypt:data error:&decryptionError];
-    NSString *errorStr = [NSString stringWithFormat:@"private Decrypt Error: %@",decryptionError];
-    return !decryptionError ? dataToStr(decryptData) : errorStr;
+    NSData *decryptData = [keyPair.private decrypt:data error:&decryptError];
+    NSString *errorStr = [NSString stringWithFormat:@"Private decrypt error: %@",decryptError];
+    return !decryptError ? dataToStr(decryptData) : errorStr;
 }
 
 
@@ -243,6 +243,53 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
 }
 
 
+#pragma mark -
++ (NSString *)SHA128_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message {
+    NSError *signError = nil;
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *signData = [keyPair.private signWithSHA128:data error:&signError];
+    NSString *errorStr = [NSString stringWithFormat:@"SHA128 sign error: %@", signError];
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+}
+
+
++ (NSString *)SHA256_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message {
+    NSError *signError = nil;
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *signData = [keyPair.private signWithSHA256:data error:&signError];
+    NSString *errorStr = [NSString stringWithFormat:@"SHA256 sign error: %@", signError];
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+}
+
+
++ (NSString *)MD5_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message {
+    NSError *signError = nil;
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *signData = [keyPair.private signWithMD5:data error:&signError];
+    NSString *errorStr = [NSString stringWithFormat:@"MD5 sign error: %@", signError];
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+}
+
+
+#pragma mark -
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair SHA128:(NSString *)signStr message:(NSString *)message {
+    NSData *data = [GTMBase64 decodeData:strToData(signStr)];
+    return [keyPair.public verifySignatureWithSHA128:data message:strToData(message)];
+}
+
+
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair SHA256:(NSString *)signStr message:(NSString *)message {
+    NSData *data = [GTMBase64 decodeData:strToData(signStr)];
+    return [keyPair.public verifySignatureWithSHA256:data message:strToData(message)];
+}
+
+
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair MD5:(NSString *)signStr message:(NSString *)message {
+    NSData *data = [GTMBase64 decodeData:strToData(signStr)];
+    return [keyPair.public verifySignatureWithMD5:data message:strToData(message)];
+}
+
+
 #pragma mark - Private method
 /** Filter secret key string header, newline, etc */
 static inline NSString *base64EncodedFromPEMStr(NSString *PEMStr) {
@@ -382,7 +429,7 @@ static inline NSString *charToStr(const char *cString) {
 }
 
 
-/** Sandbox Documents path */
+/** Sandbox documents path */
 static inline NSString *documentsDir() {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }

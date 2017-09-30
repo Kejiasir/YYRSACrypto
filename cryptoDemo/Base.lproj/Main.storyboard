@@ -43,6 +43,13 @@
                                     <action selector="privateEncrypt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mse-M7-6UR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkd-jz-CpK">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="私钥签名"/>
+                                <connections>
+                                    <action selector="sign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ov0-v7-xve"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBX-4r-gj8">
                                 <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="公钥解密"/>
@@ -86,27 +93,42 @@
                                     <action selector="setServerKeyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GR3-yp-Kal"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDs-DM-cIC">
+                                <color key="backgroundColor" red="0.08768503289" green="0.77706106090000004" blue="0.079152960529999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="公钥验签"/>
+                                <connections>
+                                    <action selector="verSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5xT-7k-YMh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="dkd-jz-CpK" firstAttribute="height" secondItem="a50-2W-VQe" secondAttribute="height" id="0Uw-MR-xV9"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="1Mc-hJ-t0N"/>
                             <constraint firstItem="lyF-2B-9Od" firstAttribute="top" secondItem="R1K-qI-zwI" secondAttribute="bottom" constant="30" id="3hE-pA-d2z"/>
                             <constraint firstItem="R1K-qI-zwI" firstAttribute="width" secondItem="Bdo-I4-0nH" secondAttribute="width" id="4jn-Bi-6cP"/>
+                            <constraint firstItem="pDs-DM-cIC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="5lg-gD-7A1"/>
+                            <constraint firstItem="pDs-DM-cIC" firstAttribute="width" secondItem="dkd-jz-CpK" secondAttribute="width" id="8RG-zU-cNA"/>
                             <constraint firstItem="Bdo-I4-0nH" firstAttribute="top" secondItem="gBX-4r-gj8" secondAttribute="bottom" constant="50" id="9gN-AA-RGp"/>
                             <constraint firstItem="R1K-qI-zwI" firstAttribute="centerX" secondItem="Bdo-I4-0nH" secondAttribute="centerX" id="9jJ-VF-J4Q"/>
+                            <constraint firstItem="dkd-jz-CpK" firstAttribute="top" secondItem="lyF-2B-9Od" secondAttribute="bottom" constant="30" id="Ees-lH-l0K"/>
+                            <constraint firstItem="dkd-jz-CpK" firstAttribute="width" secondItem="a50-2W-VQe" secondAttribute="width" id="Exi-MB-4xl"/>
+                            <constraint firstItem="pDs-DM-cIC" firstAttribute="top" secondItem="lyF-2B-9Od" secondAttribute="bottom" constant="30" id="GWG-sE-Tkv"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="Ggt-XX-6A2"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="width" secondItem="YJN-0k-Lhn" secondAttribute="width" id="HO2-j6-flR"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="height" secondItem="a50-2W-VQe" secondAttribute="height" id="IMm-eQ-cAl"/>
                             <constraint firstItem="R1K-qI-zwI" firstAttribute="top" secondItem="Bdo-I4-0nH" secondAttribute="bottom" constant="30" id="JGK-gR-NqL"/>
                             <constraint firstItem="gBX-4r-gj8" firstAttribute="width" secondItem="a50-2W-VQe" secondAttribute="width" id="NMq-o0-RnJ"/>
-                            <constraint firstItem="YJN-0k-Lhn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="160" id="On1-O6-jcW"/>
+                            <constraint firstItem="YJN-0k-Lhn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="130" id="On1-O6-jcW"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Q91-tU-DKt"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="S8T-U4-w6A"/>
-                            <constraint firstItem="CIH-RP-D1b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="Ssh-iK-j69"/>
+                            <constraint firstItem="CIH-RP-D1b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="Ssh-iK-j69"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="height" secondItem="YJN-0k-Lhn" secondAttribute="height" id="Syt-H5-GuZ"/>
                             <constraint firstItem="lyF-2B-9Od" firstAttribute="width" secondItem="R1K-qI-zwI" secondAttribute="width" id="Tv0-Z9-YOK"/>
+                            <constraint firstItem="pDs-DM-cIC" firstAttribute="height" secondItem="dkd-jz-CpK" secondAttribute="height" id="V1u-Yp-hb3"/>
                             <constraint firstItem="lyF-2B-9Od" firstAttribute="centerX" secondItem="R1K-qI-zwI" secondAttribute="centerX" id="V9V-NA-QxD"/>
                             <constraint firstItem="YJN-0k-Lhn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="Wwz-yi-UuE"/>
+                            <constraint firstItem="dkd-jz-CpK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="c0K-PA-S4p"/>
                             <constraint firstItem="a50-2W-VQe" firstAttribute="top" secondItem="YJN-0k-Lhn" secondAttribute="bottom" constant="50" id="etu-uV-de6"/>
                             <constraint firstItem="CIH-RP-D1b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nf7-l7-UmC"/>
                             <constraint firstItem="Ak4-DU-B9o" firstAttribute="centerY" secondItem="YJN-0k-Lhn" secondAttribute="centerY" id="pMp-T2-eBT"/>

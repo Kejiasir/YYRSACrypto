@@ -1,7 +1,7 @@
 //
 // YYRSACrypto.h
 //
-// Copyright (c) 2017 Arvin (https://github.com/Kejiasir/YYRSACrypto)
+// Copyright (c) 2017 Arvin.Yang (https://github.com/Kejiasir/YYRSACrypto)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -245,6 +245,75 @@ typedef void(^KeyPairBlock)(MIHKeyPair *keyPair);
  @param aPrivateKey 私钥字符串, 须是去掉头尾和换行符等的纯私钥字符串
  */
 + (void)keyPair:(KeyPairBlock)block publicKey:(NSString *)aPublicKey privateKey:(NSString *)aPrivateKey;
+
+
+#pragma mark - 私钥签名
+/**
+ * RSA私钥签名，利用SHA128散列函数
+ 
+ @param keyPair 密钥对模型
+ @param message 需要签名的字符串
+ 
+ @return 返回签名后的字符串
+ */
++ (NSString *)SHA128_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message;
+
+/**
+ * RSA私钥签名，利用SHA256散列函数
+ 
+ @param keyPair 密钥对模型
+ @param message 需要签名的字符串
+ 
+ @return 返回签名后的字符串
+ */
++ (NSString *)SHA256_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message;
+
+/**
+ * RSA私钥签名，利用MD5散列函数
+ 
+ @param keyPair 密钥对模型
+ @param message 需要签名的字符串
+ 
+ @return 返回签名后的字符串
+ */
++ (NSString *)MD5_signKeyPair:(MIHKeyPair *)keyPair message:(NSString *)message;
+
+
+#pragma mark - 公钥验签
+
+/**
+ * 验证已经签名后的消息，利用SHA128散列函数
+ 
+ @param keyPair 密钥对模型
+ @param signStr 需要验证的签名字符串
+ @param message 需要验证的消息字符串
+ 
+ @return 返回验证结果，签名有效返回 YES，无效返回 NO
+ */
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair SHA128:(NSString *)signStr message:(NSString *)message;
+
+/**
+ * 验证已经签名后的消息，利用SHA256散列函数
+ 
+ @param keyPair 密钥对模型
+ @param signStr 需要验证的签名字符串
+ @param message 需要验证的消息字符串
+ 
+ @return 返回验证结果，签名有效返回 YES，无效返回 NO
+ */
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair SHA256:(NSString *)signStr message:(NSString *)message;
+
+/**
+ * 验证已经签名后的消息，利用MD5散列函数
+ 
+ @param keyPair 密钥对模型
+ @param signStr 需要验证的签名字符串
+ @param message 需要验证的消息字符串
+ 
+ @return 返回验证结果，签名有效返回 YES，无效返回 NO
+ */
++ (BOOL)verSignKeyPair:(MIHKeyPair *)keyPair MD5:(NSString *)signStr message:(NSString *)message;
+
 
 @end
 

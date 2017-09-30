@@ -15,6 +15,7 @@ static NSString *const archiver = @"keyPair.archiver";
 
 @property (nonatomic, strong) MIHKeyPair *keyPair;
 @property (nonatomic, strong) NSString *encryptStr;
+@property (nonatomic, copy) NSString *sha128,*sha256,*md5;
 
 @end
 
@@ -24,7 +25,6 @@ static NSString *const archiver = @"keyPair.archiver";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
 }
 
 
@@ -165,6 +165,25 @@ static NSString *const archiver = @"keyPair.archiver";
 - (IBAction)publicDecrypt:(UIButton *)sender {
     NSString *decryptStr = [YYRSACrypto publicDecrypt:self.keyPair decryptStr:self.encryptStr];
     NSLog(@"公钥解密的原文: %@", decryptStr);
+}
+
+
+/// 私钥签名
+- (IBAction)sign:(UIButton *)sender {
+    NSLog(@"SHA128: %@", self.sha128 = [YYRSACrypto SHA128_signKeyPair:self.keyPair message:@"111"]);
+    NSLog(@"SHA256: %@", self.sha256 = [YYRSACrypto SHA256_signKeyPair:self.keyPair message:@"222"]);
+    NSLog(@"MD5: %@", self.md5 = [YYRSACrypto MD5_signKeyPair:self.keyPair message:@"333"]);
+}
+
+
+/// 公钥验签
+- (IBAction)verSign:(UIButton *)sender {
+    NSLog(@"SHA128: %@", [YYRSACrypto verSignKeyPair:self.keyPair SHA128:self.sha128 message:@"111"] ? @"签名有效" : @"签名无效");
+    NSLog(@"SHA256: %@", [YYRSACrypto verSignKeyPair:self.keyPair SHA256:self.sha256 message:@"222"] ? @"签名有效" : @"签名无效");
+    NSLog(@"MD5: %@", [YYRSACrypto verSignKeyPair:self.keyPair MD5:self.md5 message:@"333"] ? @"签名有效" : @"签名无效");
+    
+    NSLog(@"错误1: %@", [YYRSACrypto verSignKeyPair:self.keyPair MD5:self.md5 message:@"444"/* 验证的消息与签名的消息不一样 */] ? @"签名有效" : @"签名无效");
+    NSLog(@"错误2: %@", [YYRSACrypto verSignKeyPair:self.keyPair MD5:self.sha128/* 验证的签名字符串与签名后的不一样 */ message:@"333"] ? @"签名有效" : @"签名无效");
 }
 
 
