@@ -29,6 +29,13 @@
 #import <openssl/rsa.h>
 #import <GTMBase64.h>
 
+#ifndef __OPTIMIZE__
+#define FILE_NAME [[[NSString stringWithFormat:@"%s", __FILE__] lastPathComponent] UTF8String]
+#define NSLog(fmt, ...) fprintf(stderr,"%s %s => %d 行: %s\n", FILE_NAME, __FUNCTION__, __LINE__, [[NSString stringWithFormat:fmt, ##__VA_ARGS__] UTF8String]);
+#else
+#define NSLog(...) {}
+#endif
+
 /**
  * pem key callback block
  
@@ -71,8 +78,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *encryptError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.private encrypt:data error:&encryptError];
-    NSString *errorStr = [NSString stringWithFormat:@"Private encrypt error: %@",encryptError];
-    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
+    !encryptError ?: ({ NSLog(@"private encrypt error: %@",encryptError); });
+    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
 }
 
 
@@ -80,8 +87,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *decryptError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.public decrypt:data error:&decryptError];
-    NSString *errorStr = [NSString stringWithFormat:@"Public decrypt error: %@",decryptError];
-    return !decryptError ? dataToStr(decryptData) : errorStr;
+    !decryptError ?: ({ NSLog(@"public decrypt error: %@",decryptError); });
+    return !decryptError ? dataToStr(decryptData) : nil;
 }
 
 
@@ -90,8 +97,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *encryptError = nil;
     NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptData = [keyPair.public encrypt:data error:&encryptError];
-    NSString *errorStr = [NSString stringWithFormat:@"Public encrypt error: %@",encryptError];
-    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : errorStr;
+    !encryptError ?: ({ NSLog(@"public encrypt error: %@",encryptError); });
+    return !encryptError ? dataToStr([GTMBase64 encodeData:encryptData]) : nil;
 }
 
 
@@ -99,8 +106,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *decryptError = nil;
     NSData *data = [GTMBase64 decodeData:strToData(dataStr)];
     NSData *decryptData = [keyPair.private decrypt:data error:&decryptError];
-    NSString *errorStr = [NSString stringWithFormat:@"Private decrypt error: %@",decryptError];
-    return !decryptError ? dataToStr(decryptData) : errorStr;
+    !decryptError ?: ({ NSLog(@"private decrypt error: %@",decryptError); });
+    return !decryptError ? dataToStr(decryptData) : nil;
 }
 
 
@@ -181,7 +188,6 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
 
 
 - (void)rsa_generate_key:(KeyPairExist)block keySize:(MIHRSAKeySize)keySize archiverFileName:(NSString *)fileName {
-    
     bool isExist = isExistFileWithName(fileName);
     if (isExist) {
         !block ?: block(nil, isExist);
@@ -248,8 +254,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *signError = nil;
     NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSData *signData = [keyPair.private signWithSHA128:data error:&signError];
-    NSString *errorStr = [NSString stringWithFormat:@"SHA128 sign error: %@", signError];
-    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+    !signError ?: ({ NSLog(@"SHA128 sign error: %@",signError); });
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : nil;
 }
 
 
@@ -257,8 +263,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *signError = nil;
     NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSData *signData = [keyPair.private signWithSHA256:data error:&signError];
-    NSString *errorStr = [NSString stringWithFormat:@"SHA256 sign error: %@", signError];
-    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+    !signError ?: ({ NSLog(@"SHA256 sign error: %@",signError); });
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : nil;
 }
 
 
@@ -266,8 +272,8 @@ static NSString *const END_PRIVATE_KEY   = @"\n-----END RSA PRIVATE KEY-----";
     NSError *signError = nil;
     NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSData *signData = [keyPair.private signWithMD5:data error:&signError];
-    NSString *errorStr = [NSString stringWithFormat:@"MD5 sign error: %@", signError];
-    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : errorStr;
+    !signError ?: ({ NSLog(@"MD5 sign error: %@",signError); });
+    return !signError ? dataToStr([GTMBase64 encodeData:signData]) : nil;
 }
 
 

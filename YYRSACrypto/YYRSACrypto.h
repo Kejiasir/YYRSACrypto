@@ -280,7 +280,6 @@ typedef void(^KeyPairBlock)(MIHKeyPair *keyPair);
 
 
 #pragma mark - 公钥验签
-
 /**
  * 验证已经签名后的消息，利用SHA128散列函数
  

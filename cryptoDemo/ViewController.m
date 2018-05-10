@@ -140,36 +140,56 @@ static NSString *const archiver = @"keyPair.archiver";
 #pragma mark -
 /// 公钥加密
 - (IBAction)publicEncrypt:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSString *originStr = @"😂😇🚠♏️📡⛸⛳️🕷(ಥ_ಥ)ε(┬┬﹏┬┬)3";
     self.encryptStr = [YYRSACrypto publicEncrypt:self.keyPair encryptStr:originStr];
-    NSLog(@"公钥加密的字符串:\n%@", self.encryptStr);
+    NSLog(@"公钥加密后的字符串:\n%@", self.encryptStr);
 }
 
 
 /// 私钥解密
 - (IBAction)privateDecrypt:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSString *decryptStr = [YYRSACrypto privateDecrypt:self.keyPair decryptStr:self.encryptStr];
-    NSLog(@"私钥解密的原文: %@", decryptStr);
+    NSLog(@"私钥解密后的原文: %@", decryptStr);
 }
 
 
 /// 私钥加密
 - (IBAction)privateEncrypt:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSString *originStr = @"(╥╯^╰╥)乂(ﾟДﾟ三ﾟДﾟ)乂 🙄💏🎿🙈🌺⚔";
     self.encryptStr = [YYRSACrypto privateEncrypt:self.keyPair encryptStr:originStr];
-    NSLog(@"私钥加密的字符串:\n%@", self.encryptStr);
+    NSLog(@"私钥加密后的字符串:\n%@", self.encryptStr);
 }
 
 
 /// 公钥解密
 - (IBAction)publicDecrypt:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSString *decryptStr = [YYRSACrypto publicDecrypt:self.keyPair decryptStr:self.encryptStr];
-    NSLog(@"公钥解密的原文: %@", decryptStr);
+    NSLog(@"公钥解密后的原文: %@", decryptStr);
 }
 
 
 /// 私钥签名
 - (IBAction)sign:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSLog(@"SHA128: %@", self.sha128 = [YYRSACrypto SHA128_signKeyPair:self.keyPair message:@"111"]);
     NSLog(@"SHA256: %@", self.sha256 = [YYRSACrypto SHA256_signKeyPair:self.keyPair message:@"222"]);
     NSLog(@"MD5: %@", self.md5 = [YYRSACrypto MD5_signKeyPair:self.keyPair message:@"333"]);
@@ -178,6 +198,10 @@ static NSString *const archiver = @"keyPair.archiver";
 
 /// 公钥验签
 - (IBAction)verSign:(UIButton *)sender {
+    if (!self.keyPair) {
+        NSLog(@"请先生成秘钥对");
+        return;
+    }
     NSLog(@"SHA128: %@", [YYRSACrypto verSignKeyPair:self.keyPair SHA128:self.sha128 message:@"111"] ? @"签名有效" : @"签名无效");
     NSLog(@"SHA256: %@", [YYRSACrypto verSignKeyPair:self.keyPair SHA256:self.sha256 message:@"222"] ? @"签名有效" : @"签名无效");
     NSLog(@"MD5: %@", [YYRSACrypto verSignKeyPair:self.keyPair MD5:self.md5 message:@"333"] ? @"签名有效" : @"签名无效");
@@ -193,17 +217,16 @@ static NSString *const archiver = @"keyPair.archiver";
         NSString *enStr = [YYRSACrypto publicEncrypt:keyPair encryptStr:@"arvin🇨🇳123"];
         NSString *deStr = [YYRSACrypto privateDecrypt:keyPair decryptStr:enStr];
         
-        NSLog(@"公钥加密的字符串:\n%@", enStr);
-        NSLog(@"私钥解密的原文: %@", deStr);
-        
+        NSLog(@"公钥加密后的字符串:\n%@", enStr);
+        NSLog(@"私钥解密后的原文: %@", deStr);
     }
     NSLog(@"==============================================================================================================");
     {
         NSString *enStr = [YYRSACrypto privateEncrypt:keyPair encryptStr:@"123🇨🇳arvin"];
         NSString *deStr = [YYRSACrypto publicDecrypt:keyPair decryptStr:enStr];
         
-        NSLog(@"私钥加密的字符串:\n%@", enStr);
-        NSLog(@"公钥解密的原文: %@", deStr);
+        NSLog(@"私钥加密后的字符串:\n%@", enStr);
+        NSLog(@"公钥解密后的原文: %@", deStr);
     }
 }
 

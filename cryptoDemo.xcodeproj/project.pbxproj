@@ -153,7 +153,7 @@
 				TargetAttributes = {
 					A29B79C51F6CB6BE004FC889 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 5H4YHTYPG3;
+						DevelopmentTeam = 3ZZAF6K9GF;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -367,7 +367,7 @@
 			baseConfigurationReference = 99C501ADDEA80FE283C70C10 /* Pods-cryptoDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5H4YHTYPG3;
+				DEVELOPMENT_TEAM = 3ZZAF6K9GF;
 				GCC_PREFIX_HEADER = $SRCROOT/cryptoDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = cryptoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -382,7 +382,7 @@
 			baseConfigurationReference = 713E7C37CD21FF5E68FC6156 /* Pods-cryptoDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5H4YHTYPG3;
+				DEVELOPMENT_TEAM = 3ZZAF6K9GF;
 				GCC_PREFIX_HEADER = $SRCROOT/cryptoDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = cryptoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
