@@ -2,6 +2,8 @@
 基于 MIHCrypto 封装的 RSA 加密解密工具类, 在客户端生成密钥对, 可以归档到沙盒, 可以进行公钥加密->私钥解密, 反之私钥加密->公钥解密亦可。
 另外, 也可导入由服务器返回的公钥或者私钥字符串, 根据需求进行加密或者解密。
 
+***Swift 版本：[SwiftRSACrypto](https://github.com/Kejiasir/SwiftRSACrypto)***
+
 ### 手动安装:
 将 Demo 中的 **YYRSACrypto** 文件夹拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入 **MIHCrypto**, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要你手动导入 **openssl** 。
 
