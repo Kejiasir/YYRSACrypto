@@ -1,42 +1,44 @@
-# YYRSACrypto
+## YYRSACrypto
+
 基于 MIHCrypto 封装的 RSA 加密解密工具类, 在客户端生成密钥对, 可以归档到沙盒, 可以进行公钥加密->私钥解密, 反之私钥加密->公钥解密亦可。
 另外, 也可导入由服务器返回的公钥或者私钥字符串, 根据需求进行加密或者解密。
 
-***Swift 版本：[SwiftRSACrypto](https://github.com/Kejiasir/SwiftRSACrypto)***
+### Swift 版本：[SwiftRSACrypto](https://github.com/Kejiasir/SwiftRSACrypto)
 
-### 手动安装:
+### 手动安装：
+
 将 Demo 中的 **YYRSACrypto** 文件夹拷贝到你的工程, 使用前需导入 [MIHCrypto](https://github.com/hohl/MIHCrypto) 和 [GTMBase64](https://github.com/MxABC/GTMBase64) 这两个依赖库, 建议使用 CocoaPods 导入 **MIHCrypto**, 因为 **MIHCrypto** 是在 [openssl](https://github.com/openssl/openssl) 之上封装的, 使用 CocoaPods 导入会自动安装 **openssl**, 否则还需要你手动导入 **openssl** 。
 
-### CocoaPods 安装
-```
-pod 'YYRSACrypto'
-```
+### CocoaPods 安装：
+
+> pod 'YYRSACrypto'
+
 建议使用 CocoaPods 安装, 这样不需要再手动导入其它依赖库, 会自动安装 **MIHCrypto** ,**openssl** 和 **GTMBase64** 这三个库。
 
-### Version: 0.1.1
+#### Version: 0.1.1
 * 修改加密、解密、签名发生错误时，返回 nil，方便调用者判断。
 * 发生错误时输出 error log，当然只是在 DEBUG 的时候。
 
-### Version: 0.1.0
+#### Version: 0.1.0
 * 新增签名，验签方法。
   * SHA128
   * SHA256
   * MD5
   
-### Version: 0.0.4
+#### Version: 0.0.4
 * 新增从沙盒删除归档文件的方法。
   
-### Version: 0.0.3
+#### Version: 0.0.3
 * 新增归档解档接口, 存储数据到偏好设置。
 
-### Version: 0.0.2
+#### Version: 0.0.2
 * 修改加密返回的数据类型, 由 `NSData`  修改为 `NSString`。
 * 修改解密的参数, 由 `NSData`  修改为 `NSString`。
   
   
-### Publice Interface
+### Interface：
 
-``` objc
+```objective-c
 
 #pragma mark - 生成RSA密钥对
 /**
